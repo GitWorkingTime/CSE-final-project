@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CSE Final Project</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="timer_stopwatch.css" />
+  <meta charset="utf-8" />
+  <script src="timer_stopwatch.js"></script>
+</head>
+
+<body onload="init()">
+
+  <!-- Header -->
+  <header>
+    <h1>Timer / Stopwatch</h1>
+  </header>
+
+  <!-- Side Navigation -->
+  <nav>
+    <a href="index.html" class="nav-func">Task Manager</a>
+    <a href="timeline.html" class="nav-func">Timeline</a>
+    <a href="timer_stopwatch.html" class="nav-func">Timer/Stopwatch</a>
+  </nav>
+
+  <div class="container">
+    <div class="timer">
+      <div class="timer-display">
+        <p class="timer-text">hours:</p>
+        <div id="hours" class="hours"></div>
+      </div>
+
+      <div class="timer-display">
+        <p class="timer-text">minutes:</p>
+        <div id="minutes" class="minutes"></div>
+      </div>
+      <div class="timer-display">
+        <p class="timer-text">seconds:</p>
+        <div id="seconds" class="seconds"></div>
+      </div>
+    </div>
+
+    <label class="switch">
+      <input type="checkbox" id="checkbox" onclick="checkBox()" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <!-- Timer Functionality -->
+  <div class="timer-mode" id="timer-mode">
+    <div class="button-container specify-time" onclick="openTimerPrompt()">
+      <h1>specify time</h1>
+    </div>
+
+    <div class="button-container start" onclick="startTimer()">
+      <h1>start</h1>
+    </div>
+    <div class="button-container stop" onclick="stopTimer()">
+      <h1>stop</h1>
+    </div>
+    <div class="button-container resume" onclick="resetTimer()">
+      <h1>reset</h1>
+    </div>
+  </div>
+
+  <div class="specify-time-options" id="specify-time-options">
+    <span class="close-time" onclick="closeTimerPrompt()">Close</span>
+    <span class="submit-time" onclick="submitTimerPrompt()">Submit</span>
+
+    <div class="time-options">
+      <div class="hours-div">
+        <p>Hours:</p>
+        <select id="hours-option" class="hours-option">
+          <script>
+            for (let i = 0; i < 24; i++) {
+              document.write("<option value=" + i + ">" + i + "</option>");
+            }
+          </script>
+        </select>
+      </div>
+
+      <div class="minutes-div">
+        <p>Minutes:</p>
+        <select id="minutes-option" class="minutes-option">
+          <script>
+            for (let i = 0; i < 60; i++) {
+              document.write("<option value=" + i + ">" + i + "</option>");
+            }
+          </script>
+        </select>
+      </div>
+
+      <div class="seconds-div">
+        <p>Seconds:</p>
+        <select id="seconds-option" class="seconds-option">
+          <script>
+            for (let i = 0; i < 60; i++) {
+              document.write("<option value=" + i + ">" + i + "</option>");
+            }
+          </script>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOPWATCH FUNCTIONALITY: -->
+  <div class="stopwatch-mode" id="stopwatch-mode">
+    <div class="button-container start" onclick="startTimer()">
+      <h1>start</h1>
+    </div>
+    <div class="button-container stop" onclick="stopTimer()">
+      <h1>stop</h1>
+    </div>
+    <div class="button-container resume" onclick="resetTimer()">
+      <h1>reset</h1>
+    </div>
+  </div>
+
+  <div class="notif-div" id="notif-div">
+    <span class="notif-header">TIMER FINISHED:</span>
+    <span class="notif-exit-button" onclick="exitNotif()">exit</span>
+  </div>
+</body>
+
+</html>
