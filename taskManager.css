@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins:wght@500&display=swap');
+
+/* START OF RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+/* END OF RESET */
+
+:root {
+  /* Colours */
+  --TEXT: #DDD5EB;
+  --BACKGROUND: #161516;
+  --PRIMARY: #A399D7;
+  --SECONDARY: #191A1F;
+  --ACCENT: #FF7C7E;
+
+  /* Font Size */
+  --HEADER: 1.75rem;
+  --SUBHEADER: 1.25rem;
+  --REGULAR: 0.95rem;
+
+  /* Borders */
+  --BORDERRADIUS: 10px;
+
+  /* Sizes */
+  --LISTPROMPT_X: 20rem;
+  --LISTPROMPT_Y: 12rem;
+
+  --TASKPROMPT_X: 55rem;
+  --TASKPROMPT_Y: 40rem;
+
+  --EDITPROMPT_X: 35rem;
+  --EDITPROMPT_Y: 27rem;
+
+  --RESTORESIZE_X: 10rem;
+  --RESTORESIZE_Y: 6rem;
+}
+
+html {
+  background: var(--BACKGROUND);
+  font-family: 'Poppins', sans-serif;
+  color: var(--TEXT);
+  font-size: var(--REGULAR);
+}
+
+/* Scroll bar */
+::-webkit-scrollbar {
+  background-color: var(--SECONDARY);
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--TEXT);
+  border-radius: 10px;
+}
+
+/* Header */
+header {
+  margin-top: 0.5rem;
+  margin-right: 0.75rem;
+  font-size: var(--HEADER);
+  text-align: right;
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+
+  padding: 1rem;
+  background-color: var(--SECONDARY);
+
+  font-size: var(--SUBHEADER);
+}
+
+.nav-func {
+  text-decoration: none;
+  color: var(--TEXT);
+}
+
+/* Body */
+.header-buttons {
+  margin: 0.75rem;
+  padding: 0.5em;
+  background-color: var(--SECONDARY);
+  width: fit-content;
+  height: fit-content;
+  border-radius: var(--BORDERRADIUS);
+}
+
+.body-task-manager {
+  display: flex;
+  margin: 1rem;
+  overflow-x: auto;
+  max-width: 100vw;
+  min-height: 72.5vh;
+  max-height: 72.5vh;
+}
+
+/* Lists */
+.list {
+  background-color: var(--SECONDARY);
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: var(--BORDERRADIUS);
+  height: fit-content;
+  min-width: 17.5rem;
+  max-width: 17.5rem;
+}
+
+.container-list-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--SUBHEADER);
+  padding-bottom: 0.25rem;
+  border-bottom: 5px solid var(--PRIMARY);
+}
+
+.container-list-content {
+  margin-top: 0.25rem;
+  overflow-y: scroll;
+  max-height: 36.5rem;
+}
+
+.list-add-task {
+  background-color: var(--ACCENT);
+  color: var(--SECONDARY);
+  padding: 0rem 1rem 0rem 1rem;
+  border-radius: var(--BORDERRADIUS);
+  align-self: center;
+}
+
+/* Tasks */
+.task {
+  background-color: var(--BACKGROUND);
+  margin: 0.4rem;
+  padding: 0.5em 1em 1em 1em;
+  border-radius: var(--BORDERRADIUS);
+  box-shadow: 0px 0px 5px var(--PRIMARY);
+}
+
+.task-header {
+  font-size: var(--SUBHEADER);
+  border-bottom: 2px solid var(--PRIMARY);
+  margin-bottom: 0.75rem;
+}
+
+/* List adder prompt */
+.prompt-add-list {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: calc(50% - (0.5 * var(--LISTPROMPT_Y)));
+  left: calc(50% - (0.5 * var(--LISTPROMPT_X)));
+  padding: 1rem;
+  background-color: var(--SECONDARY);
+  width: var(--LISTPROMPT_X);
+  height: var(--LISTPROMPT_Y);
+  border-radius: var(--BORDERRADIUS);
+}
+
+.prompt-add-list-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+  font-size: var(--HEADER);
+  text-transform: capitalize;
+}
+
+.list-title {
+  border: none;
+  border-radius: var(--BORDERRADIUS);
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--BACKGROUND);
+  color: var(--TEXT);
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--REGULAR);
+  min-height: 4rem;
+  max-height: 4rem;
+  min-width: calc(100% - 1rem);
+  max-width: calc(100% - 1rem);
+  box-shadow: 0px 0px 5px var(--PRIMARY);
+}
+
+/* Add task prompt */
+.prompt-add-task {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: calc(50% - (0.5 * var(--TASKPROMPT_Y)));
+  left: calc(50% - (0.5 * var(--TASKPROMPT_X)));
+  padding: 1rem;
+  background-color: var(--SECONDARY);
+  width: var(--TASKPROMPT_X);
+  height: fit-content;
+  border-radius: var(--BORDERRADIUS);
+}
+
+.prompt-task-title {
+  min-width: calc(100% - 0.5rem);
+  max-width: calc(100% - 0.5rem);
+  max-height: 2rem;
+  min-height: 2rem;
+}
+
+.prompt-task-details {
+  min-width: calc(100% - 0.5rem);
+  max-width: calc(100% - 0.5rem);
+  max-height: 15rem;
+  min-height: 15rem;
+}
+
+.prompt-add-task-deadlines {
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt-add-task-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+
+.add-task-selection {
+  padding: 0.25rem;
+  background-color: var(--BACKGROUND);
+  color: var(--TEXT);
+  border-radius: 10px;
+}
+
+/* Edit tasks */
+.prompt-edit-task {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: calc(50% - (0.5 * var(--EDITPROMPT_Y)));
+  left: calc(50% - (0.5 * var(--EDITPROMPT_X)));
+  padding: 1rem;
+  background-color: var(--SECONDARY);
+  width: var(--EDITPROMPT_X);
+  height: var(--EDITPROMPT_Y);
+  border-radius: var(--BORDERRADIUS);
+}
+
+.edit-task-header {
+  max-width: calc(100% - 2rem);
+  min-width: calc(100% - 2rem);
+  min-height: 2rem;
+  max-height: 2rem;
+}
+
+.edit-task-details {
+  max-width: calc(100% - 2rem);
+  min-width: calc(100% - 2rem);
+  max-height: 10rem;
+  min-height: 10rem;
+}
+
+/* Deleted folder */
+.delete-folder-div {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 9.5rem;
+  background-color: var(--SECONDARY);
+  max-width: 20rem;
+  min-width: 20rem;
+  height: 30rem;
+  margin: 1rem 0rem;
+  padding: 1rem;
+  border-radius: 0px var(--BORDERRADIUS) var(--BORDERRADIUS) 0px;
+  z-index: 1;
+}
+
+.deleted-header {
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.deleted-content {
+  overflow-y: auto;
+}
+
+.deleted-popup {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: calc(50% - (0.5 * var(--RESTORESIZE_Y)));
+  left: calc(50% - (0.5 * var(--RESTORESIZE_X)) - 2rem);
+  width: var(--RESTORESIZE_X);
+  height: var(--RESTORESIZE_Y);
+  background-color: var(--SECONDARY);
+  padding: 0rem 1rem;
+  border-radius: var(--BORDERRADIUS);
+}
+
+/* Buttons */
+.button-wide {
+  width: 100%;
+  background-color: var(--ACCENT);
+  color: var(--SECONDARY);
+  text-align: center;
+  border-radius: var(--BORDERRADIUS);
+  margin: 0.25rem;
+}
+
+.button-slim {
+  background-color: var(--ACCENT);
+  color: var(--SECONDARY);
+  padding: 0rem 1rem 0rem 1rem;
+  border-radius: var(--BORDERRADIUS);
+  align-self: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* General */
+.textarea-style {
+  border: none;
+  border-radius: var(--BORDERRADIUS);
+  padding: 0.5rem;
+  background-color: var(--BACKGROUND);
+  color: var(--TEXT);
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--REGULAR);
+  box-shadow: 0px 0px 5px var(--PRIMARY);
+}
+
+.prompt-header-text {
+  margin-top: 0.5rem;
+  font-size: var(--HEADER);
+}
+
+.prompt-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: var(--HEADER);
+  padding-bottom: 0.25rem;
+  border-bottom: 5px solid var(--PRIMARY);
+}
