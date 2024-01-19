@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins:wght@500&display=swap');
+
+/* START OF RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+/* END OF RESET */
+
+:root {
+  /* Colours */
+  --TEXT: #DDD5EB;
+  --BACKGROUND: #161516;
+  --PRIMARY: #A399D7;
+  --SECONDARY: #191A1F;
+  --ACCENT: #FF7C7E;
+
+  /* Font Size */
+  --HEADER: 1.75rem;
+  --SUBHEADER: 1.25rem;
+  --REGULAR: 0.95rem;
+
+  /* Spacing */
+  --DIVIDERWIDTH: 10px;
+  --HEADERWIDTH: calc(100% / 5);
+
+  /* Prompt sizes */
+  --EDITSIZE_X: 45rem;
+  --EDITSIZE_Y: 18rem;
+
+  --RESTORESIZE_X: 10rem;
+  --RESTORESIZE_Y: 6rem;
+  /* Borders */
+  --BORDERRADIUS: 10px;
+}
+
+html {
+  background-color: var(--BACKGROUND);
+  font-family: 'Poppins', sans-serif;
+  color: var(--TEXT);
+}
+
+/* Header */
+header {
+  margin-top: 0.5rem;
+  margin-right: 0.75rem;
+  font-size: var(--HEADER);
+  text-align: right;
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+
+  padding: 1rem;
+  background-color: var(--SECONDARY);
+
+  font-size: var(--SUBHEADER);
+}
+
+.nav-func {
+  text-decoration: none;
+  color: var(--TEXT);
+}
+
+/* Scroll bar */
+::-webkit-scrollbar {
+  background-color: var(--SECONDARY);
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--TEXT);
+  border-radius: 10px;
+}
+
+/* Chart body */
+.chart {
+  margin: 1rem 0.5rem 1rem 0.5rem;
+}
+
+/* Chart header */
+.chart-header-background {
+  background-color: var(--BACKGROUND);
+  margin-bottom: 0.3rem;
+}
+
+.chart-header-div {
+  display: grid;
+  grid-template-columns: repeat(5, calc(var(--HEADERWIDTH) - 0.5rem));
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: var(--DIVIDERWIDTH);
+}
+
+.grid-el {
+  background-color: var(--SECONDARY);
+  border-radius: var(--BORDERRADIUS) var(--BORDERRADIUS) 0px 0px;
+  text-align: center;
+}
+
+.chart-header-text {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  padding: 1rem;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: var(--SECONDARY);
+  text-align: center;
+}
+
+/* Chart Body */
+.chart-body {
+  display: flex;
+}
+
+/* Tasks */
+.tasks-grid {
+  display: flex;
+  flex-direction: column;
+  width: var(--HEADERWIDTH);
+}
+
+/* Task bar */
+.chart-duration {
+  display: grid;
+  width: calc(100% - var(--HEADERWIDTH));
+  grid-template-columns: repeat(28, 1fr);
+  grid-template-rows: repeat(0, 1fr);
+  column-gap: var(--DIVIDERWIDTH);
+}
+
+.task-bar {
+  margin: 0.15rem 0rem 0.15rem 0rem;
+  background-color: var(--PRIMARY);
+  border-radius: var(--BORDERRADIUS);
+}
+
+/* Button */
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-wide {
+  width: 100%;
+  background-color: var(--ACCENT);
+  color: var(--SECONDARY);
+  text-align: center;
+  border-radius: var(--BORDERRADIUS);
+  margin: 0.25rem;
+}
+
+.button-slim {
+  background-color: var(--ACCENT);
+  color: var(--SECONDARY);
+  padding: 0rem 1rem 0rem 1rem;
+  border-radius: var(--BORDERRADIUS);
+  align-self: center;
+}
+
+/* Container */
+.container {
+  background-color: var(--BACKGROUND);
+  margin: 1rem;
+  border-radius: var(--BORDERRADIUS);
+  min-width: 40rem;
+  max-width: 40rem;
+  height: 30rem;
+}
+
+.container-header {
+  font-size: var(--HEADER);
+}
+
+/* Container tabs */
+.container-tabs-div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.container-tabs {
+  background-color: var(--SECONDARY);
+  border-radius: var(--BORDERRADIUS) var(--BORDERRADIUS) 0px 0px;
+  text-align: center;
+  padding: 0.25rem;
+}
+
+/* Container body */
+.container-body {
+  background-color: var(--SECONDARY);
+  border-radius: 0px 0px var(--BORDERRADIUS) var(--BORDERRADIUS);
+}
+
+/* Adding Tasks */
+.container-adding-task {
+  display: block;
+  padding: 1rem;
+  height: calc(100% - 2rem);
+  width: calc(100% - 2rem);
+}
+
+/* Adding Tasks - Durations */
+.container-task-duration {
+  margin-bottom: 1rem;
+}
+
+.duration-specifics {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Adding Task - Task details */
+.task-details {
+  min-width: calc(100% - 1rem);
+  max-width: calc(100% - 1rem);
+  min-height: 10rem;
+  max-height: 10rem;
+}
+
+/* Edit Tasks */
+.edit-popup {
+  display: none;
+  position: fixed;
+  top: calc(50% - (0.5 * var(--EDITSIZE_Y)));
+  left: calc(50% - (0.5 * var(--EDITSIZE_X)));
+  flex-direction: column;
+  background-color: var(--SECONDARY);
+  padding: 1rem;
+  width: var(--EDITSIZE_X);
+  height: var(--EDITSIZE_Y);
+  border-radius: var(--BORDERRADIUS);
+  box-shadow: 0px 0px 3px var(--PRIMARY);
+}
+
+
+/* Trash */
+.container-trash {
+  display: none;
+  padding: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+}
+
+.container-trash-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 5px solid var(--PRIMARY);
+}
+
+.container-trash-body {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow-y: auto;
+  min-height: 20rem;
+  max-height: 20rem;
+}
+
+.deleted-popup {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: calc(50% - (0.5 * var(--RESTORESIZE_Y)));
+  left: calc(50% - (0.5 * var(--RESTORESIZE_X)) - 2rem);
+  width: var(--RESTORESIZE_X);
+  height: var(--RESTORESIZE_Y);
+  background-color: var(--SECONDARY);
+  padding: 0rem 1rem;
+  border-radius: var(--BORDERRADIUS);
+}
+
+/* Prompts */
+.prompt-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: var(--HEADER);
+  padding-bottom: 0.25rem;
+  border-bottom: 5px solid var(--PRIMARY);
+}
+
+.prompt-header-text {
+  margin-top: 0.5rem;
+  font-size: var(--HEADER);
+}
+
+/* Edit Body */
+.edit-task-details {
+  min-width: calc(100% - 1.5rem);
+  max-width: calc(100% - 1.5rem);
+  min-height: 5rem;
+  max-height: 5rem;
+}
+
+.edit-duration {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+
+/* General */
+.textarea-style {
+  border: none;
+  border-radius: var(--BORDERRADIUS);
+  padding: 0.5rem;
+  background-color: var(--BACKGROUND);
+  color: var(--TEXT);
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--REGULAR);
+  box-shadow: 0px 0px 5px var(--PRIMARY);
+}
+
+.selection {
+  padding: 0.25rem;
+  background-color: var(--BACKGROUND);
+  color: var(--TEXT);
+  border-radius: var(--BORDERRADIUS);
+  text-transform: uppercase;
+  box-shadow: 0px 0px 3px var(--PRIMARY);
+}
