@@ -1,0 +1,230 @@
+<!-- Maybe take a look at google's gantt chart API, nvm it don't work -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CSE Final Project</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="timeline.css" />
+  <meta charset="utf-8" />
+  <script src="timeline.js"></script>
+</head>
+
+<body onload="init()">
+  <header>
+    <h1>Timeline</h1>
+  </header>
+
+  <nav>
+    <a href="index.html" class="nav-func">Task Manager</a>
+    <a href="timeline.html" class="nav-func">Timeline</a>
+    <a href="timer_stopwatch.html" class="nav-func">Timer/Stopwatch</a>
+  </nav>
+
+  <div class="chart">
+    <div class="chart-header-background">
+      <div class="chart-header-div">
+        <div class="grid-el chart-header-text">
+          <div>Tasks:</div>
+        </div>
+        <div class="grid-el">Week 1</div>
+        <div class="grid-el">Week 2</div>
+        <div class="grid-el">Week 3</div>
+        <div class="grid-el">Week 4</div>
+
+        <div class="weekdays">
+          <div class="day">s</div>
+          <div class="day">m</div>
+          <div class="day">t</div>
+          <div class="day">w</div>
+          <div class="day">t</div>
+          <div class="day">f</div>
+          <div class="day">s</div>
+        </div>
+
+        <div class="weekdays">
+          <div class="day">s</div>
+          <div class="day">m</div>
+          <div class="day">t</div>
+          <div class="day">w</div>
+          <div class="day">t</div>
+          <div class="day">f</div>
+          <div class="day">s</div>
+        </div>
+
+        <div class="weekdays">
+          <div class="day">s</div>
+          <div class="day">m</div>
+          <div class="day">t</div>
+          <div class="day">w</div>
+          <div class="day">t</div>
+          <div class="day">f</div>
+          <div class="day">s</div>
+        </div>
+
+        <div class="weekdays">
+          <div class="day">s</div>
+          <div class="day">m</div>
+          <div class="day">t</div>
+          <div class="day">w</div>
+          <div class="day">t</div>
+          <div class="day">f</div>
+          <div class="day">s</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popups">
+      <div class="edit-popup" id="edit-popup">
+        <div class="prompt-header">
+          <div class="prompt-header-text">Task:</div>
+          <div class="button-slim" onclick="exitPopUp()">Close</div>
+        </div>
+
+        <div class="prompt-header-text">Title:</div>
+        <textarea class="textarea-style edit-task-details" id="edit-task-details"></textarea>
+
+        <div class="edit-duration">
+          <div class="edit-weeks-div">
+            <span>Week:</span>
+            <select class="selection" name="edit-weeks" id="edit-weeks">
+              <option value="1">week 1</option>
+              <option value="2">week 2</option>
+              <option value="3">week 3</option>
+              <option value="4">week 4</option>
+            </select>
+          </div>
+
+          <div class="edit-start-day-div">
+            <span>Start days:</span>
+            <select class="selection" name="edit-start-days" id="edit-start-days">
+              <option value="1">sunday</option>
+              <option value="2">monday</option>
+              <option value="3">tuesday</option>
+              <option value="4">wednesday</option>
+              <option value="5">thursday</option>
+              <option value="6">friday</option>
+              <option value="7">saturday</option>
+            </select>
+          </div>
+
+          <div class="end-day-div">
+            <span>End days:</span>
+            <select class="selection" name="edit-end-day" id="edit-end-days">
+              <option value="1">sunday</option>
+              <option value="2">monday</option>
+              <option value="3">tuesday</option>
+              <option value="4">wednesday</option>
+              <option value="5">thursday</option>
+              <option value="6">friday</option>
+              <option value="7">saturday</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <div class="button-wide" onclick="savePopUp()">Save</div>
+          <div class="button-wide" onclick="deleteTask()">Delete</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-body">
+      <div class="tasks-grid" id="tasks-grid">
+        <div class="task" id="test-task" oncontextmenu="editPopUp(this); return false;">
+          task reeeeee
+        </div>
+      </div>
+      <div class="chart-duration" id="chart-duration">
+        <div class="task-bar" id="test-task-bar" data-start="1" data-end="5" data-row="1"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="container-tabs-div">
+        <div class="container-tabs" onclick="goToTaskAdder()">Task:</div>
+        <div class="container-tabs" onclick="goToTrash()">Trash:</div>
+      </div>
+
+      <div class="container-body">
+        <div class="container-adding-task" id="container-adding-task">
+          <div class="container-task-duration">
+            <span class="container-header">Task Duration:</span>
+
+            <div class="duration-specifics">
+              <div class="weeks-div">
+                <span for="weeks">Week: </span>
+                <select class="selection" name="weeks" id="weeks">
+                  <option value="1">week 1</option>
+                  <option value="2">week 2</option>
+                  <option value="3">week 3</option>
+                  <option value="4">week 4</option>
+                </select>
+              </div>
+
+              <div class="start-day-div">
+                <span>Start days: </span>
+                <select class="selection" name="start-days" id="start-days">
+                  <option value="1">sunday</option>
+                  <option value="2">monday</option>
+                  <option value="3">tuesday</option>
+                  <option value="4">wednesday</option>
+                  <option value="5">thursday</option>
+                  <option value="6">friday</option>
+                  <option value="7">saturday</option>
+                </select>
+              </div>
+
+              <div class="end-day-div">
+                <span>End days: </span>
+                <select class="selection" name="end-day" id="end-days">
+                  <option value="1">sunday</option>
+                  <option value="2">monday</option>
+                  <option value="3">tuesday</option>
+                  <option value="4">wednesday</option>
+                  <option value="5">thursday</option>
+                  <option value="6">friday</option>
+                  <option value="7">saturday</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="task-name">
+            <div class="container-header">
+              <span>Task:</span>
+            </div>
+
+            <div>
+              <textarea class="textarea-style task-details" id="task-name" placeholder="Task"></textarea>
+            </div>
+          </div>
+
+          <div class="button-wide" id="task-adder" onclick="addTask()">
+            Add task
+          </div>
+        </div>
+
+        <div class="container-trash" id="container-trash">
+          <div class="container-trash-header">
+            <div class="container-header">Deleted content:</div>
+            <div class="button-slim" onclick="clearTrash()">Clear</div>
+          </div>
+
+          <div class="container-trash-body" id="deleted-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deleted-popup" id="deleted-popup">
+      <span class="prompt-header-text">Restore?</span>
+      <div class="button-container">
+        <div class="button-wide" onclick="doRestore()">yes</div>
+        <div class="button-wide" onclick="doNotRestore()">no</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
