@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CSE Final Project</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="taskManager.css" />
+  <meta charset="utf-8" />
+  <script src="task_manager.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Task Manager</h1>
+  </header>
+
+  <nav>
+    <a href="index.html" class="nav-func">Task Manager</a>
+    <a href="timeline.html" class="nav-func">Timeline</a>
+    <a href="timer_stopwatch.html" class="nav-func">Timer/Stopwatch</a>
+  </nav>
+
+  <div class="body-content">
+    <div class="popups">
+      <div class="prompt-edit-task" id="task-popup">
+        <div class="prompt-header">
+          <div class="prompt-header-text">Edit Task:</div>
+          <div class="button-slim" onclick="exitPopUp()">Close</div>
+        </div>
+        <div class="edit-header-div">
+          <div class="prompt-header-text">Title:</div>
+          <textarea class="edit-task-header textarea-style" id="edit-task-header"></textarea>
+        </div>
+
+        <div class="edit-details-div">
+          <div class="prompt-header-text">Details:</div>
+          <textarea class="edit-task-details textarea-style" id="edit-task-details"></textarea>
+        </div>
+
+        <div class="button-container">
+          <div class="button-wide" onclick="saveChanges()">Save</div>
+          <div class="button-wide" onclick="deleteTask()">Delete</div>
+        </div>
+      </div>
+
+      <div class="prompt-add-task" id="add-task-prompt">
+        <div class="prompt-header">
+          <div class="prompt-header-text">Task:</div>
+          <div class="button-slim" onclick="closeTaskPrompt()">CLOSE</div>
+        </div>
+
+        <div class="prompt-add-task-title">
+          <div class="prompt-header-text">Title:</div>
+          <input type="text" class="prompt-task-title textarea-style" id="title" placeholder="Title" required />
+        </div>
+
+        <div class="prompt-add-task-details">
+          <div class="prompt-header-text">Details:</div>
+          <textarea class="prompt-task-details textarea-style" id="details" placeholder="details"></textarea>
+        </div>
+
+        <div class="prompt-add-task-deadlines">
+          <div class="prompt-header-text">Deadline:</div>
+
+          <div class="prompt-add-task-selection">
+            <div class="prompt-add-task-months">
+              <span>Month:</span>
+              <select class="add-task-selection" id="months">
+                <script>
+                  for (let i = 0; i < 13; i++) {
+                    document.write(
+                      "<option value=" + i + ">" + i + "</option>"
+                    );
+                  }
+                </script>
+              </select>
+            </div>
+
+            <div class="prompt-add-task-days">
+              <span>Days:</span>
+              <select class="add-task-selection" id="days">
+                <script>
+                  for (let i = 0; i < 32; i++) {
+                    document.write(
+                      "<option value=" + i + ">" + i + "</option>"
+                    );
+                  }
+                </script>
+              </select>
+            </div>
+
+            <div class="prompt-add-task-years">
+              <span>Years:</span>
+              <select class="add-task-selection" id="years">
+                <option value="0" selected="selected">0</option>
+                <script>
+                  for (let i = 2000; i < 2100; i++) {
+                    document.write(
+                      "<option value=" + i + ">" + i + "</option>"
+                    );
+                  }
+                </script>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="button-wide" onclick="addTask()">Add</div>
+      </div>
+
+      <div class="prompt-add-list" id="add-list-prompt">
+        <div class="prompt-header-text">List:</div>
+        <div class="prompt-add-list-buttons">
+          <div class="button-wide" onclick="addList()">Add</div>
+          <div class="button-wide" onclick="closeListPrompt()">Close</div>
+        </div>
+        <textarea class="list-title" id="list-title" placeholder="Title"></textarea>
+      </div>
+
+      <div class="deleted-popup" id="deleted-popup">
+        <span class="prompt-header-text">Restore?</span>
+        <div class="button-container">
+          <div class="button-wide" onclick="doRestore()">yes</div>
+          <div class="button-wide" onclick="doNotRestore()">no</div>
+        </div>
+      </div>
+
+      <div class="delete-folder-div" id="delete-folder-div">
+        <div class="prompt-header deleted-header">
+          <span class="prompt-header-text">Deleted:</span>
+          <div class="button-wide" onclick="clearTrash()">Clear</div>
+          <div class="button-wide" onclick="exitDelete()">Exit</div>
+        </div>
+
+        <div class="deleted-content" id="deleted-content"></div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <div class="header-buttons" onclick="openListPrompt()">
+        Create a list
+      </div>
+
+      <div class="header-buttons" onclick="openDeleteFolder()">Trash:</div>
+    </div>
+
+    <div class="body-task-manager" id="task-manager-body">
+      <div class="list" id="finished">
+        <div class="container-list-header">
+          <span class="list-header">Finished:</span>
+          <span class="button-slim" id="finished" onclick="openTaskPrompt(this)">
+            Add
+          </span>
+        </div>
+        <div class="container-list-content" id="finished-content">
+          <div class="task" id="test-task" oncontextmenu="editPopUp(this);return false;">
+            <div class="task-deadline">
+              Due:
+              <span class="month-text">11 /</span>
+              <span class="day-text">11 /</span>
+              <span class="year-text">2011</span>
+              <input type="checkbox" id="test-task" class="checkbox" onchange="change(this)" />
+            </div>
+            <div class="task-header" id="test-task-header">
+              We've gotta celebrate our differences!
+            </div>
+            <div class="task-details" id="test-task-details">
+              We've gotta celebraaaaaate our differences!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list" id="to-do">
+        <div class="container-list-header">
+          <span class="list-header">To-Do: </span>
+          <span class="button-slim" id="to-do" onclick="openTaskPrompt(this)">
+            Add
+          </span>
+        </div>
+        <div class="container-list-content" id="to-do-content"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
